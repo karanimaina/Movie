@@ -3,7 +3,7 @@ package com.mainafelix.myapplication.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Models implements Parcelable {
+public class MovieModels implements Parcelable {
     private String title;
     private String poster_path;
     private String release_date;
@@ -11,7 +11,7 @@ public class Models implements Parcelable {
     private Float vote_average;
     private String movie_overview;
 
-    public Models(String title, String poster_path, String release_date, int movie_id, Float vote_average, String movie_overview) {
+    public MovieModels(String title, String poster_path, String release_date, int movie_id, Float vote_average, String movie_overview) {
         this.title = title;
         this.poster_path = poster_path;
         this.release_date = release_date;
@@ -19,6 +19,31 @@ public class Models implements Parcelable {
         this.vote_average = vote_average;
         this.movie_overview = movie_overview;
     }
+
+    protected MovieModels(Parcel in) {
+        title = in.readString();
+        poster_path = in.readString();
+        release_date = in.readString();
+        movie_id = in.readInt();
+        if (in.readByte() == 0) {
+            vote_average = null;
+        } else {
+            vote_average = in.readFloat();
+        }
+        movie_overview = in.readString();
+    }
+
+    public static final Creator<MovieModels> CREATOR = new Creator<MovieModels>() {
+        @Override
+        public MovieModels createFromParcel(Parcel in) {
+            return new MovieModels(in);
+        }
+
+        @Override
+        public MovieModels[] newArray(int size) {
+            return new MovieModels[size];
+        }
+    };
 
     public String getTitle() {
         return title;
