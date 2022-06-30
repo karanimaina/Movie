@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.Button;
 
 import com.mainafelix.myapplication.databinding.ActivityMainBinding;
+import com.mainafelix.myapplication.request.Service;
+import com.mainafelix.myapplication.response.MovieSearchResult;
+
+import retrofit2.Call;
 
 public class MainActivity extends AppCompatActivity {
 Button btn;
@@ -15,7 +19,7 @@ ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater())
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         binding.btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,6 +30,8 @@ ActivityMainBinding binding;
     }
 
     private void getRetrofitResponse() {
-
+   MovieApi movieApi= Service.getMovieApi();
+        Call<MovieSearchResult> responseCall = movieApi
+                .sesrchMovie
     }
 }
