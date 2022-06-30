@@ -1,6 +1,9 @@
 package com.mainafelix.myapplication.models;
 
-public class Models {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Models implements Parcelable {
     private String title;
     private String poster_path;
     private String release_date;
@@ -39,5 +42,21 @@ public class Models {
 
     public String getMovie_overview() {
         return movie_overview;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+   parcel.writeString(title);
+   parcel.writeString(poster_path);
+   parcel.writeString(release_date);
+   parcel.writeInt(movie_id);
+   parcel.writeFloat(vote_average);
+   parcel.writeString(movie_overview);
     }
 }
